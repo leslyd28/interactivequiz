@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Which cat should you adopt</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+
+<!-- What kind of pet do you already own? Walk w pet? Mischevious or goofy? Friendly or serious? Independent or loving? Adventures w pet or staying home? Cuddle buddy? -->
+<div id="main">
+<div id="header"><h1>Which cat should you adopt?</h1></div>
+
+<form  id="form1">
+
+
+    
+<p>Pick a cat</p>
+<input name="imagepick" type="radio" id="one" value="dog1">
+    <label for="one">
+      <img src="dog1.jpg">
+    </label>
+ 
+    <input name="imagepick" type="radio" id="two" value="dog2">
+    <label for="two">
+      <img src="dog2.jpg">
+    </label>
+  
+    <input name="imagepick" type="radio" id="three" value="dog3">
+    <label for="three">
+      <img src="dog3.jpeg">
+    </label>
+    
+
+<p>Short hair or long hair on a pet?</p>
+<label><input type="radio" name="hair" id="shorthair" value="dog2" />Short hair</label>
+<label><input type="radio" name="hair" id="longhair" value="dog1" />Long hair</label>
+
+<p>Pick a dog size</p>
+<label><input type="radio" name="size" id="small" value="dog1" />Small</label>
+<label><input type="radio" name="size" id="medium" value="dog2" />Medium</label>
+<label><input type="radio" name="size" id="large" value="dog3" />Large</label>
+    
+<p>What would you name your dog?</p>
+<label> <input type="radio" name="dogname" id="Name1" value="dog1"/> Oakley </label>
+<label> <input type="radio" name="dogname" id="Name2" value="dog2"/> Pinto </label>
+<label> <input type="radio" name="dogname" id="Name3" value="dog2"/> Bailey </label>
+<label> <input type="radio" name="dogname" id="Name4" value="dog2"/> Luna </label>
+
+<button type="submit" value="Submit">Submit</button>
+</form>
+
+<p id="answer"></p>
+<p id="answer2"></p>
+<p id="answer3"></p> 
+<p id="answer4"></p>
+<p id="answer5"></p>
+<p id="answer6"></p>
+
+
+
+</div>
+<script>
+ 
+    
+	document.getElementById("form1").onsubmit=function() {
+	   
+	  pettype = document.querySelector('input[name = "pettype"]:checked').value;
+	  walk = document.querySelector('input[name = "walk"]:checked').value;
+	  personality = document.querySelector('input[name = "personality"]:checked').value;
+	  personality2 = document.querySelector('input[name = "personality2"]:checked').value;
+	  personality3 = document.querySelector('input[name = "personality3"]:checked').value;
+	  personality4 = document.querySelector('input[name = "personality4"]:checked').value;
+	    
+	  // initialize score variables 
+	  dog = 0;
+	  cat = 0;
+	  
+	  
+	  //function to calculate score for each question
+	  function eachscore(x){
+	  if(x == "dog") { dog = dog + 1}
+	  if(x == "cat") { cat = cat + 1}
+	  }
+	  // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
+	  
+	  //call function for each question
+	  eachscore(eval("pettype"));
+	  eachscore(eval("walk"));
+	  eachscore(eval("personality"));
+	  eachscore(eval("personality2"));
+	  eachscore(eval("personality3"));
+	  eachscore(eval("personality4"));
+	  
+	  
+	  all = [dog, cat];
+	  
+	//get the max score  in the array
+	maxscore = Math.max.apply(Math,all);
+	
+    //figure out which score is the max score by identifying its index number
+	for(i=0; i<all.length; i++) {
+	if(all[i]==maxscore) {
+	highest = i;
+	}
+	}
+	
+
+// object holding scores and feedback	
+scores = [{index:0, feedback: "You should adopt a dog!", image: "dog2.jpg"},
+{index:1, feedback: "You should adopt a cat!", image: "cat1.jpg"}];
+
+
+//loop to match index to score and reply with feedback
+for(i=0;i<scores.length; i++) {
+if(highest == scores[i].index) {
+document.getElementById("answer6").innerHTML = scores[i].feedback + "<br /><img src='" + scores[i].image + "' width='300'  />";
+}
+}
+    //replace dog img bc watermark
+   
+	   return false; // required to not refresh the page; just leave this here
+	   }// end the submit function
+	
+
+</script>
+
+
+</body>
+</html>
+
+

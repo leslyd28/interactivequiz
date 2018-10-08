@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>What kind of pet should you adopt</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+
+<!-- create 3 page quiz. quiz 1: dog or cat. quiz 2/3: specific dog or cat w link to SM animal shelter -->
+<!-- What kind of pet do you already own? Walk w pet? Mischevious or goofy? Friendly or serious? Independent or loving? Adventures w pet or staying home? Cuddle buddy? -->
+<div id="main">
+<div id="header"><h1>What kind of pet should you adopt?</h1></div>
+
+<form  id="form1">
+
+<p><b> What kind of pet, if any, do you already own? </b></p>
+<label> <input type="radio" name="pettype" id="dog" value="dog" /> Dog </label>
+<label> <input type="radio" name="pettype" id="cat" value="cat" /> Cat </label>
+<label> <input type="radio" name="pettype" id="other"/> I own a small pet, like a hamster </label>
+<label> <input type="radio" name="pettype" id="none"/> I don't own a pet yet </label>
+
+
+<p><b> Do you want a pet you can walk?</b></p>
+<label> <input type="radio" name="walk" id="yes" value="dog" /> Yes, multiple times a day </label>
+<label> <input type="radio" name="walk" id="no" value="cat" /> No, that's too much of a hassle </label>
+
+<p><b> Do you want a goofy or mischevious pet? </b></p>
+<label> <input type="radio" name="personality" id="goofy" value="dog" /> Goofy and playful </label>
+<label> <input type="radio" name="personality" id="mischevious" value="cat" /> Mischevious </label>
+
+<p><b> Do you want a friendly or serious pet? </b></p>
+<label> <input type="radio" name="personality2" id="friendly" value="dog" /> Friendly and excitable </label>
+<label> <input type="radio" name="personality2" id="serious"value="cat" /> Serious </label>
+
+<p><b> Do you want a pet to go on adventures with or stay home with? </b><p>
+<label> <input type="radio" name="personality3" id="adventures" value="dog" /> Go on adventures with! </label>
+<label> <input type="radio" name="personality3" id="stayhome" value="cat" /> Stay home and relax with </label>
+
+<p><b> Do you want a pet that's loving and clingy or mostly indepedent? </b></p>
+<label> <input type="radio" name="personality4" id="loving" value="dog" /> Loving and affectionate, even clingy </label>
+<label> <input type="radio" name="personality4" id="indepedent" value="cat" /> Mostly indepedent and rarely affectionate </label>
+
+
+
+<button type="submit" value="Submit">Submit</button>
+</form>
+
+<p id="answer"></p>
+<p id="answer2"></p>
+<p id="answer3"></p> 
+<p id="answer4"></p>
+<p id="answer5"></p>
+<p id="answer6"></p>
+
+<!-- what is the purpose of this above section? -->
+
+
+</div>
+<script>    
+document.getElementById("form1").onsubmit=function() {
+	   
+pettype = document.querySelector('input[name = "pettype"]:checked').value;
+walk = document.querySelector('input[name = "walk"]:checked').value;
+personality = document.querySelector('input[name = "personality"]:checked').value;
+personality2 = document.querySelector('input[name = "personality2"]:checked').value;
+personality3 = document.querySelector('input[name = "personality3"]:checked').value;
+personality4 = document.querySelector('input[name = "personality4"]:checked').value;
+	    
+	  // initialize score variables 
+	  dog = 0;
+	  cat = 0;
+	  
+	  
+	  //function to calculate score for each question
+	  function eachscore(x){
+	  if(x == "dog") { dog = dog + 1}
+	  if(x == "cat") { cat = cat + 1}
+	  }
+	  // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
+	  
+	  //call function for each question
+	  eachscore(eval("pettype"));
+	  eachscore(eval("walk"));
+	  eachscore(eval("personality"));
+	  eachscore(eval("personality2"));
+	  eachscore(eval("personality3"));
+	  eachscore(eval("personality4"));
+	  
+	  
+	  all = [dog, cat];
+	  
+	//get the max score  in the array
+	maxscore = Math.max.apply(Math,all);
+	
+    //figure out which score is the max score by identifying its index number
+	for(i=0; i<all.length; i++) {
+	if(all[i]==maxscore) {
+	highest = i;
+	}
+	}
+
+
+
+// object holding scores and feedback	
+//need to link to part 2 of quiz Take another <a href="dogquiz.html"> quiz </a> to find a perfect dog to adopt
+scores = [{index:0, feedback: "You should adopt a dog! Take another <a href='dogquiz.html'> quiz </a> to find a perfect dog to adopt.", image: "maindog.jpg"},
+{index:1, feedback: "You should adopt a cat! Take another <a href='catquiz.html'> quiz </a> to find a perfect cat to adopt.", image: "cat1.jpg"}];
+
+
+//loop to match index to score and reply with feedback
+for(i=0;i<scores.length; i++) {
+if(highest == scores[i].index) {
+document.getElementById("answer6").innerHTML = scores[i].feedback + "<br /><img src='" + scores[i].image + "' width='300'/>";
+}
+}
+   
+	   return false; // required to not refresh the page; just leave this here
+	   }// end the submit function
+	
+
+</script>
+
+
+</body>
+</html>
+
+

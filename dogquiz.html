@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Which dog should you adopt</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+
+<!-- What kind of pet do you already own? Walk w pet? Mischevious or goofy? Friendly or serious? Independent or loving? Adventures w pet or staying home? Cuddle buddy? -->
+<div id="main">
+<div id="header"><h1>Which dog should you adopt?</h1></div>
+
+<form  id="form1">
+    
+<p>Pick a dog</p>
+<input name="imagepick" type="radio" id="one" value="dog1">
+    <label for="one">
+      <img src="dog1.jpg">
+    </label>
+ 
+    <input name="imagepick" type="radio" id="rottweiler" value="dog2">
+    <label for="rottweiler">
+      <img src="rottweiler.jpg">
+    </label>
+  
+    <input name="imagepick" type="radio" id="dalmation" value="dog3">
+    <label for="dalmation">
+      <img src="dalmation.jpeg">
+    </label>
+
+    <input name="imagepick" type="radio" id="corgi" value="dog4">
+    <label for="corgi">
+      <img src="corgi.jpg">
+    </label>
+    
+
+    <p>Pick another dog</p>
+<input name="imagepick2" type="radio" id="husky" value="dog1">
+    <label for="husky">
+      <img src="husky.jpg">
+    </label>
+ 
+    <input name="imagepick2" type="radio" id="chihuahua" value="dog2">
+    <label for="chihuahua">
+      <img src="chihuahua.jpg">
+    </label>
+  
+    <input name="imagepick2" type="radio" id="shihtzu" value="dog3">
+    <label for="shihtzu">
+      <img src="shihtzu.jpg">
+    </label>
+
+    <input name="imagepick2" type="radio" id="golden" value="dog4">
+    <label for="golden">
+      <img src="golden.jpg">
+    </label>
+    
+    <!--- Dog 2: Candycorn, medium, shepherd mix. Dog 3: MARSHA, large, Labrador retriever. --> 
+
+<p>Pick a dog size</p>
+<label><input type="radio" name="size" id="small" value="dog1" />Small</label>
+<label><input type="radio" name="size" id="medium" value="dog2" />Medium</label>
+<label><input type="radio" name="size" id="large" value="dog3" />Large</label>
+<label><input type="radio" name="size" id="any" value="dog4" />Any size</label>
+
+<p>What would you name your dog?</p>
+<label> <input type="radio" name="dogname" id="name1" value="dog1"/> Oakley </label>
+<label> <input type="radio" name="dogname" id="name2" value="dog2"/> Chandler </label>
+<label> <input type="radio" name="dogname" id="name3" value="dog3"/> Marley </label>
+<label> <input type="radio" name="dogname" id="name4" value="dog4"/> Luna </label>
+    
+<p>What fun activities would you like to do with your dog?</p>
+<label> <input type="radio" name="fun" id="hiking" value="dog1"/> Long, scenic hikes </label>
+<label> <input type="radio" name="fun" id="training" value="dog2"/> Agility training and competitions </label>
+<label> <input type="radio" name="fun" id="trick3" value="dog3"/> Making friends at the dog park </label>
+<label> <input type="radio" name="fun" id="trick4" value="dog4"/> Late night drives to get fast-food </label>
+       
+
+<button type="submit" value="Submit">Submit</button>
+</form>
+
+<p id="answer"></p>
+<p id="answer2"></p>
+<p id="answer3"></p> 
+<p id="answer4"></p>
+<p id="answer5"></p>
+
+
+
+</div>
+<script>
+ 
+    
+	document.getElementById("form1").onsubmit=function() {
+	   
+	  imagepick = document.querySelector('input[name = "imagepick"]:checked').value;
+	  imagepick2 = document.querySelector('input[name = "imagepick2"]:checked').value;
+	  size = document.querySelector('input[name = "size"]:checked').value;
+	  dogname = document.querySelector('input[name = "dogname"]:checked').value;
+	  fun = document.querySelector('input[name = "fun"]:checked').value;
+	  
+	  // initialize score variables 
+	  dog1 = 0;
+	  dog2 = 0;
+      dog3 = 0;
+      dog4 = 0;
+	  
+	  
+	  //function to calculate score for each question
+	  function eachscore(x){
+	  if(x == "dog1") { dog1 = dog1 + 1}
+	  if(x == "dog2") { dog2 = dog2 + 1}
+      if(x == "dog3") { dog3 = dog3 + 1}
+      if(x == "dog4") { dog4 = dog4 + 1}
+	  }
+	  // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
+	  
+	  //call function for each question
+	  eachscore(eval("imagepick"));
+	  eachscore(eval("imagepick2"));
+	  eachscore(eval("size"));
+	  eachscore(eval("dogname"));
+	  eachscore(eval("fun"));
+	  
+	  
+	  all = [dog1, dog2, dog3, dog4];
+	  
+	//get the max score  in the array
+	maxscore = Math.max.apply(Math,all);
+	
+    //figure out which score is the max score by identifying its index number
+	for(i=0; i<all.length; i++) {
+	if(all[i]==maxscore) {
+	highest = i;
+	}
+	}
+	
+
+// object holding scores and feedback	
+scores = [{index:0, feedback: "You should adopt <a href='http://www.sheltertrack.com/Public/AnimalDetails.aspx'> Della </a>", image: "della.jpg"},
+{index:1, feedback: "You should adopt <a href='http://www.sheltertrack.com/Public/AnimalDetails.aspx'> Candycorn </a>", image: "candycorn.jpg"}, 
+{index:2, feedback: "You should adopt <a href='http://www.sheltertrack.com/Public/AnimalDetails.aspx'> Marsha </a>", image: "marsha.jpeg"},
+{index:3, feedback: "You should adopt <a href='http://www.sheltertrack.com/Public/AnimalDetails.aspx'> Yuma </a>", image: "yuma.jpg"}];
+
+
+//loop to match index to score and reply with feedback
+for(i=0;i<scores.length; i++) {
+if(highest == scores[i].index) {
+document.getElementById("answer5").innerHTML = scores[i].feedback + "<br /><img src='" + scores[i].image + "' width='300'  />";
+}
+}
+
+	   return false; // required to not refresh the page; just leave this here
+	   }// end the submit function
+	
+
+</script>
+
+
+<!-- <script>
+document.getElementById("form1").onsubmit=function() {
+       question1 = parseInt(document.querySelector('input[name = "question1"]:checked').value);
+	   question2 = parseInt(document.querySelector('input[name = "question2"]:checked').value);
+	   question3 = parseInt(document.querySelector('input[name = "question3"]:checked').value);
+	   question4 = parseInt(document.querySelector('input[name = "question4"]:checked').value);
+	   question5 = parseInt(document.querySelector('input[name = "question5"]:checked').value);
+	   
+	   
+	   result = question1 + question2 + question3 + question4 + question5;
+	   
+	document.getElementById("grade").innerHTML = result;
+
+ grading = [
+	   {score:0,feedback:"I don't think you studied", image: "none.jpg"},
+	   {score:20,feedback:"You need to spend more time. Try again", image: "poor.jpg"},
+	   {score:40,feedback:"You need to spend more time. Try again", image: "poor.jpg"},
+	   {score:60,feedback:"I think you could do better. Try again.", image: "avg.jpg"},
+	   {score:80,feedback:"So close. Try again.", image: "above.jpg"},
+	   {score:100,feedback:"Excellent! You're a JavaScript pro!", image: "excellent.jpg"}
+	   ];
+	  
+for(i=0; i<grading.length; i++) {
+    if(result == grading[i].score) {
+    result2 = grading[i].feedback + "<br /><img src='" + grading[i].image + "' width='300'  />";
+	  }
+	  }
+
+
+document.getElementById("grade2").innerHTML = result2;  -->
+
+</body>
+</html>
+
+

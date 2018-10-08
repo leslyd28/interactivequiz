@@ -1,0 +1,61 @@
+<style>
+#body {
+background-color: lightblue;
+font-family: Georgia;
+}
+
+#main {
+width: 80%;
+max-width: 950px;
+border: 1px gray solid;
+margin: auto;
+padding: 10px;
+background-color: white;
+border-radius: 10px;
+}
+
+#header {
+margin-top: 0;
+border: 2px solid black;
+padding: 5px;
+height: 250px;
+background: beige;
+background-image: url("dogcat.jpg");
+background-size:100% 100%;
+color: white;
+}
+
+
+label {
+width: 150px;
+display: inline-block;
+}
+
+button {
+display: block;
+margin-top: 20px;
+}
+
+
+input[name=imagepick] {
+  display: none;
+}
+
+input[name=imagepick2] {
+  display: none;
+}
+
+input:checked + label img {
+  border:2px solid #00f;
+}
+
+img {
+max-width: 100%;
+}
+
+.imgbox {
+width: 30%;
+}
+
+
+</style>
